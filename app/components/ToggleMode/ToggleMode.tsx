@@ -38,7 +38,7 @@ export default function ToggleMode() {
   //   );
   // }
   return (
-    <section className="flex justify-end w-[20.43rem] md:w-[40rem] mx-auto">
+    <section className="flex justify-end w-[20.43rem] md:w-[40rem] mx-auto pt-4">
       {/* {resolvedTheme === "dark" ? (
         <IoSunnyOutline
           className="cursor-pointer"
@@ -74,7 +74,16 @@ export default function ToggleMode() {
         />
         <span className="slider round"></span>
       </label>
-      <Image src={"/icon-moon-light.svg"} alt={""} width={16} height={16} />
+      <Image
+        src={`${
+          resolvedTheme === "dark"
+            ? "/icon-moon-dark.svg"
+            : "/icon-moon-light.svg"
+        }`}
+        alt={""}
+        width={16}
+        height={16}
+      />
     </section>
   );
 }
