@@ -35,7 +35,6 @@ input:checked + .slider:before {
   -ms-transform: translateX(8px);
 }
 
-
 .slider.round:before {
   -webkit-transform: translateY(2px);
 }

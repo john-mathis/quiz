@@ -24,7 +24,7 @@ export default function ToggleMode() {
 
   // }
   return (
-    <section className="flex justify-end w-[20.43rem] md:w-[40rem] mx-auto pt-4">
+    <section className="flex justify-end mx-auto pt-4 w-[20.43rem] md:w-[40rem]  md:pt-8 lg:w-[55.5rem] ">
       <Image
         src={`${
           resolvedTheme === "dark"
