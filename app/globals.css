@@ -18,3 +18,32 @@
 * {
   font-family: "Rubik", sans-serif;
 }
+
+/* The switch - the box around the slider */
+.switch {
+  @apply relative inline-block w-[60px] h-[34px];
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+  @apply opacity-0 w-0 h-0;
+}
+
+/* The slider */
+.slider {
+  @apply absolute cursor-pointer bg-[#ccc] transition-[0.4s] inset-0 before:absolute before:content-[""] before:h-[26px] before:w-[26px] before:bg-[white] before:transition-[0.4s] before:left-1 before:bottom-1;
+  -webkit-transition: 0.4s;
+}
+.slider:before {
+  -webkit-transition: 0.4s;
+}
+input:checked + .slider {
+  @apply bg-[#2196F3] before:translate-x-[26px];
+}
+input:focus + .slider {
+  @apply shadow-[0_0_1px_#2196F3];
+}
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+}

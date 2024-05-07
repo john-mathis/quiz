@@ -2,8 +2,6 @@
 import { useEffect, useState } from "react";
 import { useTheme } from "next-themes";
 import Image from "next/image";
-import { IoMoonOutline } from "react-icons/io5";
-import { IoSunnyOutline } from "react-icons/io5";
 
 export default function ToggleMode() {
   const [mounted, setMounted] = useState(false);
@@ -22,20 +20,61 @@ export default function ToggleMode() {
       title="Loading Light/Dark Toggle"
     />;
   }
-  if (resolvedTheme === "dark") {
-    return (
-      <IoSunnyOutline
-        className="cursor-pointer"
-        onClick={() => setTheme("light")}
+
+  // if (resolvedTheme === "dark") {
+  //   return (
+  //     <IoSunnyOutline
+  //       className="cursor-pointer"
+  //       onClick={() => setTheme("light")}
+  //     />
+  //   );
+  // }
+  // if (resolvedTheme === "light") {
+  //   return (
+  //     <IoMoonOutline
+  //       className="cursor-pointer"
+  //       onClick={() => setTheme("dark")}
+  //     />
+  //   );
+  // }
+  return (
+    <section className="flex justify-end w-[20.43rem] md:w-[40rem] mx-auto">
+      {/* {resolvedTheme === "dark" ? (
+        <IoSunnyOutline
+          className="cursor-pointer"
+          onClick={() => setTheme("light")}
+        />
+      ) : (
+        <IoMoonOutline
+          className="cursor-pointer"
+          onClick={() => setTheme("dark")}
+        />
+      )} */}
+
+      <Image
+        src={`${
+          resolvedTheme === "dark"
+            ? "/icon-sun-dark.svg"
+            : "/icon-sun-light.svg"
+        }`}
+        alt={""}
+        width={16}
+        height={16}
       />
-    );
-  }
-  if (resolvedTheme === "light") {
-    return (
-      <IoMoonOutline
-        className="cursor-pointer"
-        onClick={() => setTheme("dark")}
-      />
-    );
-  }
+      <label className="switch">
+        <input
+          type="checkbox"
+          onClick={() => {
+            if (resolvedTheme === "light") {
+              setTheme("dark");
+            } else if (resolvedTheme === "dark") {
+              setTheme("light");
+            }
+          }}
+        />
+        <span className="slider round"></span>
+      </label>
+      <Image src={"/icon-moon-light.svg"} alt={""} width={16} height={16} />
+    </section>
+  );
 }
