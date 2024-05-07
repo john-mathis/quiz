@@ -21,36 +21,10 @@ export default function ToggleMode() {
     />;
   }
 
-  // if (resolvedTheme === "dark") {
-  //   return (
-  //     <IoSunnyOutline
-  //       className="cursor-pointer"
-  //       onClick={() => setTheme("light")}
-  //     />
-  //   );
-  // }
-  // if (resolvedTheme === "light") {
-  //   return (
-  //     <IoMoonOutline
-  //       className="cursor-pointer"
-  //       onClick={() => setTheme("dark")}
-  //     />
-  //   );
+
   // }
   return (
     <section className="flex justify-end w-[20.43rem] md:w-[40rem] mx-auto pt-4">
-      {/* {resolvedTheme === "dark" ? (
-        <IoSunnyOutline
-          className="cursor-pointer"
-          onClick={() => setTheme("light")}
-        />
-      ) : (
-        <IoMoonOutline
-          className="cursor-pointer"
-          onClick={() => setTheme("dark")}
-        />
-      )} */}
-
       <Image
         src={`${
           resolvedTheme === "dark"
@@ -61,8 +35,9 @@ export default function ToggleMode() {
         width={16}
         height={16}
       />
-      <label className="switch">
+      <label className="relative inline-block w-[2rem] h-[1.25rem]">
         <input
+        className="opacity-0 w-0 h-0 before:translate-x-[.5rem]"
           type="checkbox"
           onClick={() => {
             if (resolvedTheme === "light") {
@@ -72,7 +47,7 @@ export default function ToggleMode() {
             }
           }}
         />
-        <span className="slider round"></span>
+        <span className="slider round bg-[--purple] before:translate-x-[.5rem] absolute cursor-pointer bg-[#ccc] transition-[0.4s] inset-0 before:absolute before:content-[''] before:h-[1rem] before:w-[1rem] before:bg-[white] before:transition-[0.4s] before:left-1 before:bottom-1 before:rounded-[50%] rounded-[2.12rem]"></span>
       </label>
       <Image
         src={`${
