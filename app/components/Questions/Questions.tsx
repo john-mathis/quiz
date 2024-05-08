@@ -28,11 +28,12 @@ export default function Questions({
   const HTML_OPTIONS = Data.quizzes[0].questions[currentQuestionIndex].options
   
   return (
-    <section className="mx-auto flex flex-col items-center">
-
-      <div>
-      <p>Question {currentQuestionIndex + 1} of 10 </p>
-      {HTML_QUESTIONS[currentQuestionIndex].question}
+    <section className="mx-auto flex flex-col items-center w-[20rem] xs:w-[15rem] md:w-[40rem] lg:w-[30.25rem]">
+      
+      <div className="h-[8.06rem]">
+      <p className="text-center">Question {currentQuestionIndex + 1} of 10 </p>
+      <p className="text-[1.25rem]">{HTML_QUESTIONS[currentQuestionIndex].question}</p>
+      
       </div>
 
 
