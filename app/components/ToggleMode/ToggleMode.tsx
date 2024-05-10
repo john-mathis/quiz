@@ -21,10 +21,9 @@ export default function ToggleMode() {
     />;
   }
 
-
   // }
   return (
-    <section className="flex justify-end mx-auto pt-4 w-[20.43rem] md:w-[40rem]  md:pt-8 lg:w-[55.5rem] ">
+    <section className="flex justify-end mx-auto pt-4 w-[20.43rem] md:w-[40rem] md:pt-8 lg:w-[55.5rem] xl:w-[72.5rem] ">
       <Image
         src={`${
           resolvedTheme === "dark"
@@ -37,7 +36,7 @@ export default function ToggleMode() {
       />
       <label className="relative inline-block w-[2rem] h-[1.25rem]">
         <input
-        className="opacity-0 w-0 h-0 before:translate-x-[.5rem]"
+          className="opacity-0 w-0 h-0 before:translate-x-[.5rem]"
           type="checkbox"
           onClick={() => {
             if (resolvedTheme === "light") {
