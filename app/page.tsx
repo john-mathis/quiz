@@ -1,3 +1,4 @@
+"use client";
 import MenuSelection from "./components/MenuSelection/MenuSelection";
 import WelcomeHeader from "./components/WelcomeHeader/WelcomeHeader";
 

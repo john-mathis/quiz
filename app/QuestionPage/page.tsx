@@ -1,4 +1,5 @@
 "use client";
+import { useEffect } from "react";
 import { useAppContext } from "../context";
 import Questions from "../components/Questions/Questions";
 import QuizData from "../data.json";

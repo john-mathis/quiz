@@ -1,17 +1,35 @@
 "use client";
-import { createContext, useContext, useState } from "react";
+import {
+  createContext,
+  useContext,
+  Dispatch,
+  SetStateAction,
+  useState,
+} from "react";
 
-const AppContext = createContext({
-  hello: "world",
+interface ContextProps {
+  topic: [];
+  setTopic: Dispatch<SetStateAction<[]>>;
+}
+
+const AppContext = createContext<ContextProps>({
+  topic: [],
+  setTopic: (): [] => [],
 });
 
-export function AppWrapper({ children }: { children: React.ReactNode }) {
-  let [state, setState] = useState({
-    hello: "world",
-  });
+export const AppContextProvider = ({
+  children,
+}: {
+  children: React.ReactNode;
+}) => {
+  const [topic, setTopic] = useState<[]>([]);
 
-  return <AppContext.Provider value={state}>{children}</AppContext.Provider>;
-}
+  return (
+    <AppContext.Provider value={{ topic, setTopic }}>
+      {children}
+    </AppContext.Provider>
+  );
+};
 
 export function useAppContext() {
   return useContext(AppContext);
