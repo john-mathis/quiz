@@ -1,27 +1,19 @@
 "use client";
-import {
-  createContext,
-  useContext,
-  Dispatch,
-  SetStateAction,
-  useState,
-} from "react";
+import React, { createContext, useContext, Dispatch, SetStateAction, useState, ReactNode } from "react";
 
 interface ContextProps {
   topic: [];
   setTopic: Dispatch<SetStateAction<[]>>;
 }
 
-const AppContext = createContext<ContextProps>({
+const defaultValue: ContextProps = {
   topic: [],
-  setTopic: (): [] => [],
-});
+  setTopic: () => [], // Providing a default no-op function
+};
 
-export const AppContextProvider = ({
-  children,
-}: {
-  children: React.ReactNode;
-}) => {
+const AppContext = createContext<ContextProps>(defaultValue);
+
+export const AppContextProvider = ({ children }: { children: ReactNode }) => {
   const [topic, setTopic] = useState<[]>([]);
 
   return (
