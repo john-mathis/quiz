@@ -3,8 +3,7 @@ import { useState } from "react";
 import SubmitButton from "../SubmitButton/SubmitButton";
 
 interface QuestionProps {
-  QUESTIONS: Array<{question: string, options: string[]}>;
-
+  QUESTIONS: Array<{ question: string; options: string[] }>;
 }
 
 const indexToLetter = (index: number) => String.fromCharCode(65 + index); // Move helper function outside
@@ -23,7 +22,7 @@ export default function Questions({ QUESTIONS }: QuestionProps) {
 
   return (
     <section className="mx-auto mb-6 lg:mt-10 flex flex-col lg:flex-row lg:justify-between w-[20rem] xs:w-[15rem] md:w-[40rem] lg:w-[55.5rem] xl:w-[72.5rem]">
-      <div className="lg:w-[30rem] h-[8.06rem] xl:ml-44">
+      <div className=" pb-4 lg:w-[30rem] h-[8.06rem] xl:ml-44 mb-8">
         <p className="dark:text-[--light-grey] italic text-center lg:text-left">
           Question {currentQuestionIndex + 1} of {QUESTIONS.length}
         </p>
