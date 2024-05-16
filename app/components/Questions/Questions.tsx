@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import SubmitButton from "../SubmitButton/SubmitButton";
+import Image from "next/image";
 
 interface QuestionProps {
   QUESTIONS: Array<{ question: string; options: string[] }>;
@@ -10,10 +11,20 @@ const indexToLetter = (index: number) => String.fromCharCode(65 + index); // Mov
 
 export default function Questions({ QUESTIONS }: QuestionProps) {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  const [selectedOption, setSelectedOption] = useState(-1);
+  const [isOptionSelected, setIsOptionSelected] = useState(true);
 
   const handleNext = () => {
-    if (currentQuestionIndex < QUESTIONS.length - 1) {
-      setCurrentQuestionIndex(currentQuestionIndex + 1);
+    if (selectedOption >= 0) {
+      if (currentQuestionIndex < QUESTIONS.length - 1) {
+        setCurrentQuestionIndex(currentQuestionIndex + 1);
+        setIsOptionSelected(true);
+        setSelectedOption(-1); // Reset the selected option for the next question
+      } else {
+        // Handle the case where it's the last question
+      }
+    } else {
+      setIsOptionSelected(false);
     }
   };
 
@@ -35,7 +46,10 @@ export default function Questions({ QUESTIONS }: QuestionProps) {
         {currentOptions.map((option, index) => (
           <div
             key={index}
-            className="flex items-center pl-3 h-16 w-[20.43rem] md:w-[40rem] lg:w-[30.25rem] mb-4 bg-white dark:bg-[--grey-navy] rounded-lg cursor-pointer"
+            onClick={() => setSelectedOption(index)}
+            className={`flex items-center pl-3 h-16 w-[20.43rem] md:w-[40rem] lg:w-[30.25rem] mb-4 bg-white dark:bg-[--grey-navy] rounded-lg cursor-pointer ${
+              selectedOption === index ? "border-4 border-purple-500" : ""
+            }`}
           >
             <p className="rounded flex items-center justify-center bg-[--light-grey] text-black w-[2rem] h-[2rem] mr-2">
               {indexToLetter(index)}
@@ -44,6 +58,19 @@ export default function Questions({ QUESTIONS }: QuestionProps) {
           </div>
         ))}
         <SubmitButton action={handleNext} />
+
+        {!isOptionSelected && (
+          <div className="flex flex-row justify-center mt-8">
+            <Image
+              className="text-white"
+              src={"/icon-error.svg"}
+              alt="error icon"
+              width={32}
+              height={32}
+            />
+            <p className="text-center m-auto">Please select an answer</p>
+          </div>
+        )}
       </div>
     </section>
   );
