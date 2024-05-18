@@ -1,7 +1,8 @@
 "use client";
 import { useState } from "react";
-import SubmitButton from "../SubmitButton/SubmitButton";
+import PrimaryButton from "../PrimaryButton/PrimaryButton";
 import Image from "next/image";
+import SelectAnswerError from "./SelectAnswerError/SelectAnswerError";
 
 interface QuestionProps {
   QUESTIONS: Array<{ question: string; options: string[]; answer: string }>;
@@ -14,16 +15,18 @@ export default function Questions({ QUESTIONS }: QuestionProps) {
   const [selectedOption, setSelectedOption] = useState("");
   const [isOptionSelected, setIsOptionSelected] = useState(true);
   const [questionsCorrect, setQuestionsCorrect] = useState(0);
+  const [submitClicked, setSubmitClicked] = useState(false);
 
   const handleNext = () => {
     if (selectedOption) {
-      if (selectedOption === currentAnswer) {
+      if (selectedOption === correctAnswer) {
         setQuestionsCorrect(questionsCorrect + 1);
       }
       if (currentQuestionIndex < QUESTIONS.length - 1) {
         setCurrentQuestionIndex(currentQuestionIndex + 1);
         setIsOptionSelected(true);
         setSelectedOption(""); // Reset the selected option for the next question
+        setSubmitClicked(false);
       } else {
         // Handle the case where it's the last question
       }
@@ -32,9 +35,27 @@ export default function Questions({ QUESTIONS }: QuestionProps) {
     }
   };
 
+  const handleSubmit = () => {
+    if (selectedOption) {
+      setSubmitClicked(true);
+      setIsOptionSelected(true);
+      if (selectedOption === correctAnswer) {
+        setQuestionsCorrect(questionsCorrect + 1);
+      }
+    } else {
+      setIsOptionSelected(false);
+    }
+  };
+
+  // if the selected answer is the correct answer, highlight the correct answer with a green border and add a checkmark to the option
+
+  // if the selected answer is the wrong answer, highlight the selected answer with a red border and add a x mark next to it while adding the checkmark next to the correct answer
+
+  // The button should change to next question after the submit an answer button is selected
+
   const currentQuestion = QUESTIONS[currentQuestionIndex];
   const currentOptions = currentQuestion.options;
-  const currentAnswer = currentQuestion.answer;
+  const correctAnswer = currentQuestion.answer;
 
   return (
     <section className="mx-auto mb-6 lg:mt-10 flex flex-col lg:flex-row lg:justify-between w-[20rem] xs:w-[15rem] md:w-[40rem] lg:w-[55.5rem] xl:w-[72.5rem]">
@@ -59,23 +80,21 @@ export default function Questions({ QUESTIONS }: QuestionProps) {
             <p className="rounded flex items-center justify-center bg-[--light-grey] text-black w-[2rem] h-[2rem] mr-2">
               {indexToLetter(index)}
             </p>
-            <p>{option}</p>
+            <p onClick={() => setIsOptionSelected(true)}>{option}1</p>
           </div>
         ))}
-        <SubmitButton action={handleNext} />
 
-        {!isOptionSelected && (
-          <div className="flex flex-row justify-center items-center mt-8 text-center m-auto">
-            <Image
-              className="text-white"
-              src={"/icon-error.svg"}
-              alt="error icon"
-              width={32}
-              height={32}
-            />
-            <p>Please select an answer</p>
-          </div>
+        {/* Displays the 'Submit Answer' button until an answer is selected and the user clicks on it. It then hides and displays the 'Next Question' button.  */}
+        {submitClicked === false && (
+          <PrimaryButton action={handleSubmit} text={"Submit Answer"} />
         )}
+
+        {/* Once the 'Submit Answer' button is clicked, the 'Next Question' button is displayed. When the 'Next Question' button is clicked, it is hidden and the 'Submit Answer' button appears again.  */}
+        {submitClicked === true && (
+          <PrimaryButton action={handleNext} text={"Next Question"} />
+        )}
+
+        {isOptionSelected === false && <SelectAnswerError />}
       </div>
     </section>
   );
