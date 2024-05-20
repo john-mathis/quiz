@@ -23,7 +23,6 @@ export default function MenuSelection() {
     },
   ];
 
-  console.log(quizTopics[0].questions);
   return (
     <section className="flex flex-col justify-between items-center h-[18.25rem]">
       {quizTopics.map((quiz, index) => (
