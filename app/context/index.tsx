@@ -1,23 +1,42 @@
 "use client";
-import React, { createContext, useContext, Dispatch, SetStateAction, useState, ReactNode } from "react";
+import React, {
+  createContext,
+  useContext,
+  Dispatch,
+  SetStateAction,
+  useState,
+  ReactNode,
+} from "react";
 
 interface ContextProps {
-  topic: [];
-  setTopic: Dispatch<SetStateAction<[]>>;
+  quizQuestions: [];
+  setQuizQuestions: Dispatch<SetStateAction<[]>>;
+  selectedTopic: string;
+  setSelectedTopic: Dispatch<SetStateAction<string>>;
 }
 
 const defaultValue: ContextProps = {
-  topic: [],
-  setTopic: () => [], // Providing a default no-op function
+  quizQuestions: [],
+  setQuizQuestions: () => [], // Providing a default no-op function
+  selectedTopic: "",
+  setSelectedTopic: () => "",
 };
 
 const AppContext = createContext<ContextProps>(defaultValue);
 
 export const AppContextProvider = ({ children }: { children: ReactNode }) => {
-  const [topic, setTopic] = useState<[]>([]);
+  const [quizQuestions, setQuizQuestions] = useState<[]>([]);
+  const [selectedTopic, setSelectedTopic] = useState<string>("");
 
   return (
-    <AppContext.Provider value={{ topic, setTopic }}>
+    <AppContext.Provider
+      value={{
+        quizQuestions,
+        setQuizQuestions,
+        setSelectedTopic,
+        selectedTopic,
+      }}
+    >
       {children}
     </AppContext.Provider>
   );
