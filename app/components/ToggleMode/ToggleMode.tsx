@@ -21,6 +21,14 @@ export default function ToggleMode() {
     />;
   }
 
+  const handleToggle = () => {
+    if (resolvedTheme === "light") {
+      setTheme("dark");
+    } else if (resolvedTheme === "dark") {
+      setTheme("light");
+    }
+  };
+
   // }
   return (
     <section className="flex justify-end mx-auto pt-4 w-[20.43rem] md:w-[40rem] md:pt-8 lg:w-[55.5rem] xl:w-[72.5rem] ">
@@ -38,13 +46,7 @@ export default function ToggleMode() {
         <input
           className="opacity-0 w-0 h-0 before:translate-x-[.5rem]"
           type="checkbox"
-          onClick={() => {
-            if (resolvedTheme === "light") {
-              setTheme("dark");
-            } else if (resolvedTheme === "dark") {
-              setTheme("light");
-            }
-          }}
+          onClick={handleToggle}
         />
         <span className="slider round bg-[--purple] before:translate-x-[.5rem] absolute cursor-pointer bg-[#ccc] transition-[0.4s] inset-0 before:absolute before:content-[''] before:h-[1rem] before:w-[1rem] before:bg-[white] before:transition-[0.4s] before:left-1 before:bottom-1 before:rounded-[50%] rounded-[2.12rem]"></span>
       </label>
