@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import PrimaryButton from "../PrimaryButton/PrimaryButton";
-import SelectAnswerError from "./SelectAnswerError/SelectAnswerError";
+import SelectAnswerError from "../SelectAnswerError/SelectAnswerError";
 
 interface QuestionProps {
   QUESTIONS: Array<{ question: string; options: string[]; answer: string }>;
@@ -121,7 +121,7 @@ export default function Questions({ QUESTIONS }: QuestionProps) {
           </div>
         </section>
       ) : (
-        <>
+        <> 
           {questionsCorrect}
           <PrimaryButton action={handleEndOfQuiz} text="Play Again" />
         </>
