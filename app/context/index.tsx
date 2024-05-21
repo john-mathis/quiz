@@ -11,22 +11,22 @@ import React, {
 interface ContextProps {
   quizQuestions: [];
   setQuizQuestions: Dispatch<SetStateAction<[]>>;
-  selectedTopic: string;
-  setSelectedTopic: Dispatch<SetStateAction<string>>;
+  selectedTopic: {};
+  setSelectedTopic: Dispatch<SetStateAction<{ title: string; img: string }>>;
 }
 
 const defaultValue: ContextProps = {
   quizQuestions: [],
   setQuizQuestions: () => [], // Providing a default no-op function
-  selectedTopic: "",
-  setSelectedTopic: () => "",
+  selectedTopic: { title: "", img: "" },
+  setSelectedTopic: () => {},
 };
 
 const AppContext = createContext<ContextProps>(defaultValue);
 
 export const AppContextProvider = ({ children }: { children: ReactNode }) => {
   const [quizQuestions, setQuizQuestions] = useState<[]>([]);
-  const [selectedTopic, setSelectedTopic] = useState<string>("");
+  const [selectedTopic, setSelectedTopic] = useState<{}>({});
 
   return (
     <AppContext.Provider
