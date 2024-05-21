@@ -73,20 +73,20 @@ export default function Questions({ QUESTIONS }: QuestionProps) {
       if (submitClicked) {
         borderColorClass = isSelected
           ? isCorrect
-            ? "border-4 border-green-500"
-            : "border-4 border-red-500"
+            ? "border-2 border-green-500"
+            : "border-2 border-red-500"
           : "";
       } else if (isSelected) {
-        borderColorClass = "border-4 border-purple-500";
+        borderColorClass = "border-2 border-purple-500";
       }
 
       return (
         <div
           key={index}
           onClick={() => handleOptionClick(option)}
-          className={`flex items-center pl-3 h-16 w-[20.43rem] md:w-[40rem] lg:w-[30.25rem] mb-4 bg-white dark:bg-[--grey-navy] rounded-lg cursor-pointer ${borderColorClass}`}
+          className={`flex items-center pl-3 h-16 xs:w-[18rem] xs:h-20 xs:px-2 w-[20.43rem] md:w-[40rem] lg:w-[30.25rem] mb-4 bg-white dark:bg-[--grey-navy] rounded-lg cursor-pointer ${borderColorClass}`}
         >
-          <p className="rounded flex items-center justify-center bg-[--light-grey] text-black w-[2rem] h-[2rem] mr-2">
+          <p className="rounded flex items-center justify-center bg-[--light-grey] text-black w-[2rem] h-[2rem] ml-2 mr-4">
             {indexToLetter(index)}
           </p>
           <p>{option}</p>
