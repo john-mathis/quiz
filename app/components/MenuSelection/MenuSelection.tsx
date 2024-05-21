@@ -6,7 +6,7 @@ import QUIZ_DATA from "../../data.json";
 
 export default function MenuSelection() {
   const { quizzes } = QUIZ_DATA;
-  const { setQuizQuestions } = useAppContext();
+  const { setQuizQuestions, setSelectedTopic, selectedTopic } = useAppContext();
 
   const quizTopics = [
     { questions: quizzes[0].questions, img: "/icon-html.svg", title: "HTML" },
@@ -29,7 +29,14 @@ export default function MenuSelection() {
         <Link
           href="/QuestionPage"
           key={index}
-          onClick={() => setQuizQuestions(quiz.questions)}
+          onClick={() => {
+            setQuizQuestions(quiz.questions);
+            setSelectedTopic((prevState) => ({
+              ...prevState,
+              title: quiz.title,
+              img: quiz.img,
+            }));
+          }}
         >
           <Selection img={quiz.img} title={quiz.title} />
         </Link>
