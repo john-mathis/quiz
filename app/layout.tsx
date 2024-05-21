@@ -4,6 +4,7 @@ import "./globals.css";
 import { Providers } from "../providers";
 import ToggleMode from "./components/ToggleMode/ToggleMode";
 import { AppContextProvider } from "./context";
+import ToggleModeContainer from "./components/ToggleMode/ToggleModeContainer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -27,7 +28,7 @@ export default function RootLayout({
       >
         <AppContextProvider>
           <Providers>
-            <ToggleMode />
+            <ToggleModeContainer />
             {children}
           </Providers>
         </AppContextProvider>

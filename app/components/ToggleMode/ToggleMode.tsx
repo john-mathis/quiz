@@ -31,7 +31,8 @@ export default function ToggleMode() {
 
   // }
   return (
-    <section className="flex justify-end mx-auto pt-4 w-[20.43rem] md:w-[40rem] md:pt-8 lg:w-[55.5rem] xl:w-[72.5rem] ">
+    <section>
+      <div className="flex flex-row">
       <Image
         src={`${
           resolvedTheme === "dark"
@@ -60,6 +61,7 @@ export default function ToggleMode() {
         width={16}
         height={16}
       />
+      </div>
     </section>
   );
 }
