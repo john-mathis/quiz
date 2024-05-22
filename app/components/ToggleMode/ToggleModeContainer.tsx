@@ -23,7 +23,7 @@ export default function ToggleModeContainer() {
         isObjectEmpty();
     }, [selectedTopic]);
 
-    console.log(selectedTopic);
+    
     
     return (
         <section className={`flex ${objectIsEmpty ? "justify-end" : "justify-between"} mx-auto pt-4 w-[20.43rem] md:w-[40rem] md:pt-8 lg:w-[55.5rem] xl:w-[72.5rem]`}>
