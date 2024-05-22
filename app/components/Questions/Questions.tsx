@@ -4,7 +4,7 @@ import PrimaryButton from "../PrimaryButton/PrimaryButton";
 import SelectAnswerError from "../SelectAnswerError/SelectAnswerError";
 
 interface QuestionProps {
-  QUESTIONS: Array<{ question: string; options: string[]; answer: string }>;
+  QUESTIONS: Array<{ question: string; options: []; answer: string; }>
 }
 
 const indexToLetter = (index: number) => String.fromCharCode(65 + index); // Helper function
