@@ -11,7 +11,7 @@ export default function ToggleModeContainer() {
     const [objectIsEmpty, setObjectIsEmpty] = useState(true);
     const { selectedTopic } = useAppContext();
 
-    console.log(selectedTopic)
+
 
     useEffect(() => {
         const isObjectEmpty = () => {
