@@ -20,10 +20,6 @@ export default function MenuSelection() {
     { questions: quizzes[3].questions,img: "/icon-accessibility.svg",title: "Accessibility",},
   ];
 
-
-
-  
-
   return (
     <section className="flex flex-col justify-between items-center h-[18.25rem]">
       {quizTopics.map((quiz, index) => (
@@ -32,8 +28,7 @@ export default function MenuSelection() {
           key={index}
           onClick={() => {
             setQuizQuestions(quiz.questions as QuizQuestionProps[] );
-            setSelectedTopic((prevState) => ({
-              ...prevState,
+            setSelectedTopic(() => ({
               title: quiz.title,
               img: quiz.img,
             }));

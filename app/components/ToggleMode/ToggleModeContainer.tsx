@@ -11,9 +11,11 @@ export default function ToggleModeContainer() {
     const [objectIsEmpty, setObjectIsEmpty] = useState(true);
     const { selectedTopic } = useAppContext();
 
+    console.log(selectedTopic)
+
     useEffect(() => {
         const isObjectEmpty = () => {
-            if (Object.keys(selectedTopic).length === 0) {
+            if (selectedTopic.title ==="") {
                 setObjectIsEmpty(true);
             } else {
                 setObjectIsEmpty(false);
@@ -22,8 +24,6 @@ export default function ToggleModeContainer() {
 
         isObjectEmpty();
     }, [selectedTopic]);
-
-    
     
     return (
         <section className={`flex ${objectIsEmpty ? "justify-end" : "justify-between"} mx-auto pt-4 w-[20.43rem] md:w-[40rem] md:pt-8 lg:w-[55.5rem] xl:w-[72.5rem]`}>
