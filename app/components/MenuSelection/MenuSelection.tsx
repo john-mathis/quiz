@@ -1,14 +1,11 @@
 "use client";
 import { useAppContext, QuizQuestionProps } from "@/app/context";
 import Selection from "../SelectButton/Selection";
-import Link from "next/link";
 import QUIZ_DATA from "../../data.json";
-import { useRouter } from "next/navigation";
 
 export default function MenuSelection() {
   const { quizzes } = QUIZ_DATA;
   const { setQuizQuestions, setSelectedTopic } = useAppContext();
-  const path = useRouter();
 
   // There is a more effcient way to gather this data.
   const quizTopics = [
@@ -37,13 +34,9 @@ export default function MenuSelection() {
   return (
     <section className="flex flex-col justify-between items-center h-[18.25rem]">
       {quizTopics.map((quiz, index) => (
-        <Link
-          href={`/QuestionPage/${quiz.title}`}
-          key={index}
-          onClick={() => handleClick(quiz)}
-        >
+        <section key={index} onClick={() => handleClick(quiz)}>
           <Selection img={quiz.img} title={quiz.title} />
-        </Link>
+        </section>
       ))}
     </section>
   );

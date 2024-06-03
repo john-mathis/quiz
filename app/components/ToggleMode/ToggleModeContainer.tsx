@@ -8,22 +8,18 @@ import { useRouter, usePathname } from "next/navigation";
 
 export default function ToggleModeContainer() {
   const [objectIsEmpty, setObjectIsEmpty] = useState(true);
-  const { selectedTopic, setSelectedTopic } = useAppContext();
+  const { selectedTopic } = useAppContext();
   const router = useRouter();
-  const pathName = usePathname();
-
-  console.log(selectedTopic);
-  console.log(pathName);
 
   useEffect(() => {
     if (selectedTopic.title === "") {
       router.push("/");
       setObjectIsEmpty(true);
-    } else if (selectedTopic.title !== "") {
+    } else {
       router.push(`QuestionPage/${selectedTopic.title}`);
       setObjectIsEmpty(false);
     }
-  }, [selectedTopic, router]);
+  }, [selectedTopic, router, objectIsEmpty]);
 
   // Effect to handle URL path changes
 
