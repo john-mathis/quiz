@@ -84,7 +84,7 @@ export default function Questions({ QUESTIONS }: QuestionProps) {
         <div
           key={index}
           onClick={() => handleOptionClick(option)}
-          className={`flex items-center pl-3 h-16 xs:w-[18rem] xs:h-20 xs:px-2 w-[20.43rem] md:w-[40rem] lg:w-[30.25rem] mb-4 bg-white dark:bg-[--grey-navy] rounded-lg cursor-pointer ${borderColorClass}`}
+          className={`flex items-center pl-3 h-16 xs:w-[18rem] xs:h-20 xs:px-2 w-[20.43rem] md:w-[40rem] lg:w-[30.25rem] xl:w-[35rem] mb-4 bg-white dark:bg-[--grey-navy] rounded-lg cursor-pointer ${borderColorClass}`}
         >
           <p className="rounded flex items-center justify-center bg-[--light-grey] text-black w-[2rem] h-[2rem] ml-2 mr-4">
             {indexToLetter(index)}
@@ -99,11 +99,11 @@ export default function Questions({ QUESTIONS }: QuestionProps) {
     <>
       {!endOfQuiz ? (
         <section className="mx-auto mb-6 lg:mt-10 flex flex-col lg:flex-row lg:justify-between w-[20rem] xs:w-[15rem] md:w-[40rem] lg:w-[55.5rem] xl:w-[72.5rem]">
-          <div className="pb-4 lg:w-[30rem] h-[8.06rem] xl:ml-44 mb-8">
-            <p className="dark:text-[--light-grey] italic text-center lg:text-left">
+          <div className="pb-4 lg:w-[30rem] h-[8.06rem] mb-8">
+            <p className="mt-6 dark:text-[--light-grey] italic text-center lg:text-left">
               Question {currentQuestionIndex + 1} of {QUESTIONS.length}
             </p>
-            <p className="font-semibold mt-6 text-[1.25rem] md:text-[1.5rem] lg:text-[2rem] xl:text-[2.25rem] text-center lg:text-left">
+            <p className="font-semibold mt-6 text-[1.25rem] md:text-[1.5rem] lg:text-[2rem] xl:text-[2.1rem] text-center lg:text-left">
               {currentQuestion.question}
             </p>
           </div>
