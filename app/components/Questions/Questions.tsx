@@ -2,6 +2,8 @@
 import { useState } from "react";
 import PrimaryButton from "../PrimaryButton/PrimaryButton";
 import SelectAnswerError from "../SelectAnswerError/SelectAnswerError";
+import { useAppContext } from "@/app/context";
+import QuizComplete from "../QuizComplete/QuizComplete";
 
 interface QuestionProps {
   QUESTIONS: Array<{ question: string; options: []; answer: string }>;
@@ -16,9 +18,12 @@ export default function Questions({ QUESTIONS }: QuestionProps) {
   const [questionsCorrect, setQuestionsCorrect] = useState(0);
   const [submitClicked, setSubmitClicked] = useState(false);
   const [endOfQuiz, setEndOfQuiz] = useState(false);
+  const {selectedTopic} = useAppContext()
 
   const currentQuestion = QUESTIONS[currentQuestionIndex];
   const { options: currentOptions, answer: correctAnswer } = currentQuestion;
+
+  console.log(selectedTopic)
 
   const handleNext = () => {
     if (selectedOption) {
@@ -103,12 +108,12 @@ export default function Questions({ QUESTIONS }: QuestionProps) {
             <p className="mt-6 dark:text-[--light-grey] italic text-center lg:text-left">
               Question {currentQuestionIndex + 1} of {QUESTIONS.length}
             </p>
-            <p className="font-semibold mt-6 text-[1.25rem] md:text-[1.5rem] lg:text-[2rem] xl:text-[2.1rem] text-center lg:text-left">
+            <p className="font-semibold my-6 text-[1.25rem] md:text-[1.5rem] lg:text-[2rem] xl:text-[2.1rem] text-center lg:text-left">
               {currentQuestion.question}
             </p>
           </div>
 
-          <div className="flex flex-col justify-center items-center lg:items-end lg:w-[48.5rem]">
+          <div className="flex flex-col justify-center items-center lg:items-end lg:w-[48.5rem] my-16">
             {renderOptions()}
 
             {!submitClicked ? (
@@ -122,7 +127,7 @@ export default function Questions({ QUESTIONS }: QuestionProps) {
         </section>
       ) : (
         <>
-          {questionsCorrect}
+          <QuizComplete questionsCorrect={questionsCorrect} topic={selectedTopic}/>
           <PrimaryButton action={handleEndOfQuiz} text="Play Again" />
         </>
       )}
