@@ -73,14 +73,14 @@ export default function Questions({ QUESTIONS }: QuestionProps) {
     return currentOptions.map((option, index) => {
       const isSelected = selectedOption === option;
       const isCorrect = option === correctAnswer;
-
+  
       let borderColorClass = "";
       if (submitClicked) {
-        borderColorClass = isSelected
-          ? isCorrect
-            ? "border-2 border-green-500"
-            : "border-2 border-red-500"
-          : "";
+        if (isCorrect) {
+          borderColorClass = "border-2 border-green-500";
+        } else if (isSelected && !isCorrect) {
+          borderColorClass = "border-2 border-red-500";
+        }
       } else if (isSelected) {
         borderColorClass = "border-2 border-purple-500";
       }
