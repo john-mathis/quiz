@@ -126,10 +126,10 @@ export default function Questions({ QUESTIONS }: QuestionProps) {
           </div>
         </section>
       ) : (
-        <>
+        <div className="lg:flex flex-col items-end">
           <QuizComplete questionsCorrect={questionsCorrect} topic={selectedTopic}/>
           <PrimaryButton action={handleEndOfQuiz} text="Play Again" />
-        </>
+        </div>
       )}
     </>
   );
