@@ -23,7 +23,7 @@ export default function Questions({ QUESTIONS }: QuestionProps) {
   const currentQuestion = QUESTIONS[currentQuestionIndex];
   const { options: currentOptions, answer: correctAnswer } = currentQuestion;
 
-  console.log(selectedTopic)
+  
 
   const handleNext = () => {
     if (selectedOption) {
