@@ -24,6 +24,8 @@ interface ContextProps {
   setQuizQuestions: Dispatch<SetStateAction<QuizQuestionProps[]>>;
   selectedTopic: SelectedTopicProps;
   setSelectedTopic: Dispatch<SetStateAction<SelectedTopicProps>>;
+  isQuizComplete:boolean;
+  setIsQuizComplete: Dispatch<SetStateAction<boolean>>
 }
 
 const defaultValue: ContextProps = {
@@ -31,6 +33,8 @@ const defaultValue: ContextProps = {
   setQuizQuestions: () => [], // Providing a default no-op function
   selectedTopic: { title: "", img: "" },
   setSelectedTopic: () => {},
+  isQuizComplete: false,
+  setIsQuizComplete: ()=>{}
 };
 
 const AppContext = createContext<ContextProps>(defaultValue);
@@ -38,6 +42,7 @@ const AppContext = createContext<ContextProps>(defaultValue);
 export const AppContextProvider = ({ children }: { children: ReactNode }) => {
   const [quizQuestions, setQuizQuestions] = useState<QuizQuestionProps[]>([]);
   const [selectedTopic, setSelectedTopic] = useState<SelectedTopicProps>({title:"", img:""})
+  const [isQuizComplete, setIsQuizComplete] = useState<boolean>(false)
 
   return (
     <AppContext.Provider
@@ -46,6 +51,8 @@ export const AppContextProvider = ({ children }: { children: ReactNode }) => {
         setQuizQuestions,
         setSelectedTopic,
         selectedTopic,
+        isQuizComplete, 
+        setIsQuizComplete,
       }}
     >
       {children}
