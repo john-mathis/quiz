@@ -2,10 +2,17 @@
 import { useAppContext, QuizQuestionProps } from "@/app/context";
 import Selection from "../SelectButton/Selection";
 import QUIZ_DATA from "../../data.json";
+import Link from "next/link";
+import { title } from "process";
 
 export default function MenuSelection() {
   const { quizzes } = QUIZ_DATA;
-  const { setQuizQuestions, setSelectedTopic } = useAppContext();
+  const { setQuizQuestions, setSelectedTopic, selectedTopic, isQuizComplete } = useAppContext();
+
+
+
+
+console.log(title)
 
   // There is a more effcient way to gather this data.
   const quizTopics = [
@@ -23,6 +30,8 @@ export default function MenuSelection() {
     },
   ];
 
+  
+
   const handleClick = (quiz: any) => {
     setQuizQuestions(quiz.questions as QuizQuestionProps[]);
     setSelectedTopic({
@@ -32,6 +41,7 @@ export default function MenuSelection() {
   };
 
   return (
+    <Link href={`/QuestionPage/topic=${selectedTopic}?complete=${isQuizComplete}`}>
     <section className="flex flex-col justify-between items-center h-[18.25rem]">
       {quizTopics.map((quiz, index) => (
         <section key={index} onClick={() => handleClick(quiz)}>
@@ -39,5 +49,6 @@ export default function MenuSelection() {
         </section>
       ))}
     </section>
+    </Link>
   );
 }

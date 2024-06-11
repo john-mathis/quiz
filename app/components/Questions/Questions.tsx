@@ -4,6 +4,7 @@ import PrimaryButton from "../PrimaryButton/PrimaryButton";
 import SelectAnswerError from "../SelectAnswerError/SelectAnswerError";
 import { useAppContext } from "@/app/context";
 import QuizComplete from "../QuizComplete/QuizComplete";
+import { useSearchParams } from "next/navigation";
 
 interface QuestionProps {
   QUESTIONS: Array<{ question: string; options: []; answer: string }>;
@@ -17,8 +18,9 @@ export default function Questions({ QUESTIONS }: QuestionProps) {
   const [isOptionSelected, setIsOptionSelected] = useState(true);
   const [questionsCorrect, setQuestionsCorrect] = useState(0);
   const [submitClicked, setSubmitClicked] = useState(false);
-  const [endOfQuiz, setEndOfQuiz] = useState(false);
-  const {selectedTopic} = useAppContext()
+  
+  const {selectedTopic, isQuizComplete, setIsQuizComplete} = useAppContext()
+
 
   const currentQuestion = QUESTIONS[currentQuestionIndex];
   const { options: currentOptions, answer: correctAnswer } = currentQuestion;
@@ -31,7 +33,7 @@ export default function Questions({ QUESTIONS }: QuestionProps) {
         setCurrentQuestionIndex((prev) => prev + 1);
         resetStateForNextQuestion();
       } else {
-        setEndOfQuiz(true);
+        setIsQuizComplete(true);
       }
     } else {
       setIsOptionSelected(false);
@@ -63,7 +65,7 @@ export default function Questions({ QUESTIONS }: QuestionProps) {
   };
 
   const handleEndOfQuiz = () => {
-    setEndOfQuiz(false);
+    setIsQuizComplete(false);
     setCurrentQuestionIndex(0);
     setQuestionsCorrect(0);
     resetStateForNextQuestion();
@@ -102,7 +104,7 @@ export default function Questions({ QUESTIONS }: QuestionProps) {
 
   return (
     <>
-      {!endOfQuiz ? (
+      {!isQuizComplete ? (
         <section className="mx-auto mb-6 lg:mt-10 flex flex-col lg:flex-row lg:justify-between w-[20rem] xs:w-[15rem] md:w-[40rem] lg:w-[55.5rem] xl:w-[72.5rem]">
           <div className="pb-4 lg:w-[30rem] h-[8.06rem] mb-8">
             <p className="mt-6 dark:text-[--light-grey] italic text-center lg:text-left">

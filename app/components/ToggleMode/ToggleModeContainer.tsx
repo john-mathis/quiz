@@ -18,7 +18,7 @@ export default function ToggleModeContainer() {
       router.push("/");
       setObjectIsEmpty(true);
     } else {
-      router.push(`QuestionPage/${selectedTopic.title}`);
+      // router.push(`QuestionPage/${selectedTopic.title}`);
       setObjectIsEmpty(false);
     }
     
@@ -27,8 +27,7 @@ export default function ToggleModeContainer() {
 
   return (
     <section
-      className={`flex ${
-        objectIsEmpty ? "justify-end" : "justify-between"
+      className={`flex ${objectIsEmpty ? 'justify-end' : 'justify-between'} 
       } mx-auto pt-4 w-[20.43rem] md:w-[40rem] md:pt-8 lg:w-[55.5rem] xl:w-[72.5rem]`}
     >
       {objectIsEmpty ? (
