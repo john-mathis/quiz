@@ -1,6 +1,7 @@
 import { useAppContext } from "@/app/context";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 interface QuizCompleteProps {
   questionsCorrect: number;
@@ -14,9 +15,12 @@ export default function QuizComplete({
   const { isQuizComplete, selectedTopic } = useAppContext();
   const router = useRouter();
 
+ useEffect(()=>{
   router.push(
     `/QuestionPage/topic=${selectedTopic.title}?complete=${isQuizComplete}`
   );
+ }, [router, isQuizComplete])
+
   return (
     <section>
       <div className="lg:flex justify-between mt-8 xs:w-[18rem] w-[20.43rem] md:w-[40rem] lg:w-[55.5rem] xl:w-[72.5rem]">
