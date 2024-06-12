@@ -3,16 +3,13 @@ import { useAppContext, QuizQuestionProps } from "@/app/context";
 import Selection from "../SelectButton/Selection";
 import QUIZ_DATA from "../../data.json";
 import Link from "next/link";
-import { title } from "process";
+import { useRouter } from "next/navigation";
 
 export default function MenuSelection() {
   const { quizzes } = QUIZ_DATA;
-  const { setQuizQuestions, setSelectedTopic, selectedTopic, isQuizComplete } = useAppContext();
-
-
-
-
-console.log(title)
+  const { setQuizQuestions, setSelectedTopic, selectedTopic, isQuizComplete } =
+    useAppContext();
+  const router = useRouter();
 
   // There is a more effcient way to gather this data.
   const quizTopics = [
@@ -30,18 +27,17 @@ console.log(title)
     },
   ];
 
-  
-
   const handleClick = (quiz: any) => {
     setQuizQuestions(quiz.questions as QuizQuestionProps[]);
     setSelectedTopic({
       title: quiz.title,
       img: quiz.img,
     });
+
+    router.push(`/QuestionPage/topic=${quiz.title}?complete=${isQuizComplete}`);
   };
 
   return (
-    <Link href={`/QuestionPage/topic=${selectedTopic}?complete=${isQuizComplete}`}>
     <section className="flex flex-col justify-between items-center h-[18.25rem]">
       {quizTopics.map((quiz, index) => (
         <section key={index} onClick={() => handleClick(quiz)}>
@@ -49,6 +45,5 @@ console.log(title)
         </section>
       ))}
     </section>
-    </Link>
   );
 }

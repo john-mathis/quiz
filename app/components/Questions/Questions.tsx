@@ -4,7 +4,7 @@ import PrimaryButton from "../PrimaryButton/PrimaryButton";
 import SelectAnswerError from "../SelectAnswerError/SelectAnswerError";
 import { useAppContext } from "@/app/context";
 import QuizComplete from "../QuizComplete/QuizComplete";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 interface QuestionProps {
   QUESTIONS: Array<{ question: string; options: []; answer: string }>;
@@ -18,14 +18,12 @@ export default function Questions({ QUESTIONS }: QuestionProps) {
   const [isOptionSelected, setIsOptionSelected] = useState(true);
   const [questionsCorrect, setQuestionsCorrect] = useState(0);
   const [submitClicked, setSubmitClicked] = useState(false);
-  
-  const {selectedTopic, isQuizComplete, setIsQuizComplete} = useAppContext()
 
+  const { selectedTopic, isQuizComplete, setIsQuizComplete } = useAppContext();
 
   const currentQuestion = QUESTIONS[currentQuestionIndex];
   const { options: currentOptions, answer: correctAnswer } = currentQuestion;
-
-  
+  const router = useRouter();
 
   const handleNext = () => {
     if (selectedOption) {
@@ -69,13 +67,16 @@ export default function Questions({ QUESTIONS }: QuestionProps) {
     setCurrentQuestionIndex(0);
     setQuestionsCorrect(0);
     resetStateForNextQuestion();
+    router.push(
+      `/QuestionPage/topic=${selectedTopic.title}?complete=${isQuizComplete}`
+    );
   };
 
   const renderOptions = () => {
     return currentOptions.map((option, index) => {
       const isSelected = selectedOption === option;
       const isCorrect = option === correctAnswer;
-  
+
       let borderColorClass = "";
       if (submitClicked) {
         if (isCorrect) {
@@ -129,7 +130,10 @@ export default function Questions({ QUESTIONS }: QuestionProps) {
         </section>
       ) : (
         <div className="lg:flex flex-col items-end">
-          <QuizComplete questionsCorrect={questionsCorrect} topic={selectedTopic}/>
+          <QuizComplete
+            questionsCorrect={questionsCorrect}
+            topic={selectedTopic}
+          />
           <PrimaryButton action={handleEndOfQuiz} text="Play Again" />
         </div>
       )}
