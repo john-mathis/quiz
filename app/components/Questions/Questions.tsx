@@ -1,10 +1,9 @@
-"use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import PrimaryButton from "../PrimaryButton/PrimaryButton";
 import SelectAnswerError from "../SelectAnswerError/SelectAnswerError";
 import { useAppContext } from "@/app/context";
 import QuizComplete from "../QuizComplete/QuizComplete";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 interface QuestionProps {
   QUESTIONS: Array<{ question: string; options: []; answer: string }>;
@@ -16,6 +15,7 @@ const indexToLetter = (index: number) => String.fromCharCode(65 + index); // Hel
 export default function Questions({ QUESTIONS }: QuestionProps) {
 // Used to manage the routing.
   const router = useRouter();
+  const searchParams = useSearchParams();
    // Brings in global state from the useAppContext component. 
    const { selectedTopic, isQuizComplete, setIsQuizComplete } = useAppContext();
   // Keeps track of the current question within the quiz.
@@ -34,6 +34,16 @@ export default function Questions({ QUESTIONS }: QuestionProps) {
   // Uses the data passed into the component as props to filter the current question's answers and correct answer. 
   const { options: currentOptions, answer: correctAnswer } = currentQuestion;
   
+
+  useEffect(() => {
+    // Retrieve the value of the "topic" query parameter from the URL
+    const mack = searchParams.get("topic");
+    // Log the retrieved value to the console
+    
+  },);
+  
+  
+
 
   const handleOptionClick = (option: string) => {
     // If the submit button has not been clicked...
@@ -102,7 +112,7 @@ const resetStateForNextQuestion = () => {
   
     // Redirect to the beginning of the quiz with completion status false
     router.push(
-      `/QuestionPage?topic=${selectedTopic.title}&complete=false`
+      `/QuestionPage/topic=${selectedTopic.title}&complete=false`
     );
   };
   
